@@ -143,7 +143,7 @@ const MarketPlace = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-gray-200 py-8 px-16">
+    <div className="bg-gray-900 text-gray-200 py-8 px-16 h-full">
       {/* Top Navigation Bar */}
       <div className="flex justify-between  border border-white py-3 px-5 rounded-full items-center mb-4">
         {/* Logo */}
@@ -228,7 +228,7 @@ const MarketPlace = () => {
               onClick={() => handleCardClick(commodity)}
             >
               <img
-                src="/trade_bridge.png"
+                src={`https://gateway.pinata.cloud/ipfs/${commodity[4]}`}
                 alt={commodity[2]}
                 className="h-32 w-full object-cover rounded-t-lg"
               />
@@ -260,7 +260,7 @@ const MarketPlace = () => {
                 >
                   <div className="relative">
                     <img
-                      src="/trade_bridge.png"
+                      src={`https://gateway.pinata.cloud/ipfs/${commodity[4]}`}
                       alt={commodity[2]}
                       className="h-40 w-full object-cover rounded-lg"
                     />
@@ -307,7 +307,7 @@ const MarketPlace = () => {
           <div className="bg-white text-gray-900 p-6 rounded-lg w-1/3">
             <h2 className="text-2xl font-bold mb-4">{selectedCommodity[2]}</h2>
             <img
-              src="/trade_bridge.png"
+              src={"`https://gateway.pinata.cloud/ipfs/${commodity[4]}`"}
               alt={selectedCommodity[2]}
               className="h-full w-full object-contain rounded-t-lg"
             />

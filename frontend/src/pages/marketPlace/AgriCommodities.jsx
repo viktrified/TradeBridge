@@ -47,7 +47,7 @@ const AgriCommodities = () => {
         ) : (
           currentItems.map((commodity, index) => (
             <div key={index} className="border rounded-lg shadow-md">
-              <img src={commodity.image} alt={commodity.name} className="h-48 w-full object-cover rounded-t-lg" />
+              <img src="`https://gateway.pinata.cloud/ipfs/${commodity.image}`" alt={commodity.name} className="h-48 w-full object-cover rounded-t-lg" />
               <div className="p-2 bg-white rounded-b-lg">
                 <h2 className="text-lg font-semibold mb-2">{commodity.name}</h2>
                 <div className="space-y-1">
