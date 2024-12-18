@@ -18,7 +18,7 @@ const CreateCommodity = () => {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(null);
-  const [imageCID, setImageCID] = useState(null);
+  const [imageCID, setImageCID] = useState("");
   const [file, setFile] = useState(null);
   const [filePrev, setFilePrev] = useState(null);
 
