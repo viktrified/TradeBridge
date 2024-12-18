@@ -23,6 +23,8 @@ import soy from "./soy-bean.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaSearch } from "react-icons/fa";
+
 
 const MarketPlace = () => {
   const navigate = useNavigate();
@@ -372,7 +374,22 @@ const MarketPlace = () => {
         <div className="grid grid-cols-1 gap-8">
           {/* Agricultural Commodities */}
           <div className="bg-gray-800 p-6 rounded-lg space-y-4">
-            <h3 className="text-xl font-bold mb-4">All Commodities</h3>
+            <div className="flex gap-16 items-center ">
+              <h3 className="text-xl font-bold mb-4">All Commodities</h3>
+
+              <input
+                type="text"
+                placeholder="Search..."
+                className="bg-transparent border border-gray-300 rounded-xl p-2 pr-16 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 relative"
+              />
+              {/* <div>
+                <FaSearch
+                  size={24}
+                  color="gray"
+                  className="mb-4 absolute top-1/1 ri transform -translate-y-1/2"
+                />
+              </div> */}
+            </div>
             {/* <div className="grid grid-cols-5 gap-12">
               {commodities.slice(0, 4).map((commodity, index) => (
                 <div
@@ -478,15 +495,14 @@ const MarketPlace = () => {
                   1 ETH
                 </p>
                 <div className="flex flex-col gap-2 px-4">
-
-                <h3 className="text-2xl font-bold">Spices</h3>
-                <span className="textlg">Price (tonnes): 1 ETH</span>
-                <span>
-                  Quantity: <span className="font-bold">5</span>
-                </span>
-                <span>
-                  Location: <span className="font-bold">Kaduna</span>
-                </span>
+                  <h3 className="text-2xl font-bold">Spices</h3>
+                  <span className="textlg">Price (tonnes): 1 ETH</span>
+                  <span>
+                    Quantity: <span className="font-bold">5</span>
+                  </span>
+                  <span>
+                    Location: <span className="font-bold">Kaduna</span>
+                  </span>
                 </div>
                 <button className="rounded-xl font-bold py-2 px-2 bg-orange-500 my-2 mx-4 mt-12">
                   Purchase
@@ -502,15 +518,14 @@ const MarketPlace = () => {
                   0.3 ETH
                 </p>
                 <div className="flex flex-col gap-2 px-4">
-
-                <h3 className="text-2xl font-bold">Cobalt</h3>
-                <span className="textlg">Price (grams): 0.3 ETH</span>
-                <span>
-                  Quantity: <span className="font-bold">200</span>
-                </span>
-                <span>
-                  Location: <span className="font-bold">Jos</span>
-                </span>
+                  <h3 className="text-2xl font-bold">Cobalt</h3>
+                  <span className="textlg">Price (grams): 0.3 ETH</span>
+                  <span>
+                    Quantity: <span className="font-bold">200</span>
+                  </span>
+                  <span>
+                    Location: <span className="font-bold">Jos</span>
+                  </span>
                 </div>
                 <button className="rounded-xl font-bold py-2 px-2 bg-orange-500 my-2 mx-4 mt-12">
                   Purchase
@@ -526,15 +541,14 @@ const MarketPlace = () => {
                   1e-19 ETH
                 </p>
                 <div className="flex flex-col gap-2 px-4">
-
-                <h3 className="text-2xl font-bold">Beef</h3>
-                <span className="textlg">Price (kg): 1e-19 ETH</span>
-                <span>
-                  Quantity: <span className="font-bold">200</span>
-                </span>
-                <span>
-                  Location: <span className="font-bold">Lagos</span>
-                </span>
+                  <h3 className="text-2xl font-bold">Beef</h3>
+                  <span className="textlg">Price (kg): 1e-19 ETH</span>
+                  <span>
+                    Quantity: <span className="font-bold">200</span>
+                  </span>
+                  <span>
+                    Location: <span className="font-bold">Lagos</span>
+                  </span>
                 </div>
                 <button className="rounded-xl font-bold py-2 px-2 bg-orange-500 my-4 mx-4 mt-12">
                   Purchase
