@@ -20,7 +20,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="bg-orange-500 rounded-full px-4 py-2"></button>
+          {/* <button className="bg-orange-500 rounded-full px-4 py-2"></button> */}
           <Link to="/seller-dashboard/create-commodity" className="px-4 py-2 bg-orange-500 rounded-full flex items-center">
             <FaPlus className="mr-2" /> Add Product
           </Link>
@@ -37,9 +37,8 @@ const Navbar = () => {
             </Link>
             </div>
             <div>
-            <Link to="/create-ticket" className="px-4 py-2 bg-orange-500 rounded-full flex items-center">
-            {/* <FaTicketAlt className="mr-2" /> Create a ticket */}
-          </Link>
+            {/* <Link to="/create-ticket" className="px-4 py-2 bg-orange-500 rounded-full flex items-center">
+          </Link> */}
           </div>
           </div>
 

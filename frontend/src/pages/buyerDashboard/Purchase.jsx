@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import TradeBridgeABI from "../../../ABIs/TradeBridge.json";
 import Skeleton from "../../components/Skeleton";
 import Logo from "../../assets/images/trade_bridge.png";
-import { getSignedUrlFromPinata, checkWalletConnection } from "../../utils/functions";
+import {
+  getSignedUrlFromPinata,
+  checkWalletConnection,
+} from "../../utils/functions";
 
 const Purchase = () => {
   const navigate = useNavigate();
@@ -24,10 +27,10 @@ const Purchase = () => {
   const [price, setPrice] = useState("0 ETH");
 
   const location = useLocation();
-  
+
   const { commodityChoice } = location.state || {};
 
-  console.log(commodityChoice)
+  console.log(commodityChoice);
 
   useEffect(() => {
     if (!commodityChoice || commodityChoice == "undefined") {
@@ -46,7 +49,7 @@ const Purchase = () => {
 
   useEffect(() => {
     if (shouldNavigate) {
-      navigate('/market-place');
+      navigate("/market-place");
     }
   }, [shouldNavigate, navigate]);
 
@@ -56,7 +59,7 @@ const Purchase = () => {
   } catch (e) {
     console.error("Failed to parse commodityChoice:", e);
     toast.error("Invalid commodity data.");
-    navigate('/market-place');
+    navigate("/market-place");
     return null;
   }
 
@@ -65,15 +68,15 @@ const Purchase = () => {
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       console.log("MetaMask detected");
-      console.log('clicked')
+      console.log("clicked");
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
-        
+
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        
+
         const userSigner = await provider.getSigner();
         const accounts = await provider.listAccounts();
-        
+
         setSigner(userSigner);
         setAccount(accounts[0]);
         setAccountState(accounts[0]);
@@ -82,18 +85,25 @@ const Purchase = () => {
       } catch (error) {
         if (error.code === 4001) {
           console.error("User rejected the request.");
-          alert("You rejected the connection request. Please connect to use the app.");
+          alert(
+            "You rejected the connection request. Please connect to use the app."
+          );
         } else {
-          console.error("Error fetching accounts or connecting to MetaMask:", error);
+          console.error(
+            "Error fetching accounts or connecting to MetaMask:",
+            error
+          );
         }
       }
     } else {
-      console.error("MetaMask not installed. Please install MetaMask to use this app.");
+      console.error(
+        "MetaMask not installed. Please install MetaMask to use this app."
+      );
       alert("MetaMask not installed. Please install it to proceed.");
     }
   };
 
-   const disconnectWallet = () => {
+  const disconnectWallet = () => {
     setAccountState(null);
     setAccount(null);
     setSigner(null);
@@ -103,15 +113,21 @@ const Purchase = () => {
   };
 
   useEffect(() => {
-      const checkConnection = async () => {
-        await checkWalletConnection(setAddress, setAccount, setAccountState, setSigner, setError);
+    const checkConnection = async () => {
+      await checkWalletConnection(
+        setAddress,
+        setAccount,
+        setAccountState,
+        setSigner,
+        setError
+      );
     };
-    
+
     checkConnection();
 
     const accountsChangedHandler = (accounts) => {
       if (accounts.length > 0) {
-        console.log(accounts[0])
+        console.log(accounts[0]);
         setAccountState(accounts[0]);
         setAccount(accounts[0]);
       } else {
@@ -126,17 +142,20 @@ const Purchase = () => {
 
     return () => {
       if (window.ethereum) {
-        window.ethereum.removeListener("accountsChanged", accountsChangedHandler);
+        window.ethereum.removeListener(
+          "accountsChanged",
+          accountsChangedHandler
+        );
         window.ethereum.removeListener("disconnect", disconnectWallet);
       }
     };
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     if (quantity > 0 && commodity) {
       const calculatedPrice = quantity * (commodity[6] / 1e18);
-      console.log(calculatedPrice)
-      setActualPrice(calculatedPrice)
+      console.log(calculatedPrice);
+      setActualPrice(calculatedPrice);
       setPrice(`${calculatedPrice} ETH`);
     } else {
       setPrice(0);
@@ -149,17 +168,25 @@ const Purchase = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        
-        const contractAddress = import.meta.env.VITE_TRADE_BRIDGE_SCA; 
-        console.log(contractAddress)
-        const commodityContract = new ethers.Contract(contractAddress, TradeBridgeABI, signer);
+
+        const contractAddress = import.meta.env.VITE_TRADE_BRIDGE_SCA;
+        console.log(contractAddress);
+        const commodityContract = new ethers.Contract(
+          contractAddress,
+          TradeBridgeABI,
+          signer
+        );
 
         console.log("Commodity ID:", commodity[0]);
         console.log("Quantity:", quantity);
 
-        const purchase = await commodityContract.buyCommodity(commodity[0], quantity, {
-          gasLimit: 300000,
-        });
+        const purchase = await commodityContract.buyCommodity(
+          commodity[0],
+          quantity,
+          {
+            gasLimit: 300000,
+          }
+        );
         await purchase.wait();
         console.log("Purchase successful:", purchase);
       } catch (error) {

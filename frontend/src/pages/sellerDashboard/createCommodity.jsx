@@ -83,7 +83,6 @@ const CreateCommodity = () => {
         console.error("Error uploading file:", error);
         toast.error("Failed to upload file.");
       }
-
     }
   };
 
